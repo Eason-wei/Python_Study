@@ -1,3 +1,2 @@
-user.n
-ame = "eason"
-user.password = "675452716zm"
+Î¹Î¹Î¹Î¹Î¹e = "eason"
+user.password = "675452716zm"ÔøÔøÔøÔøÔø
