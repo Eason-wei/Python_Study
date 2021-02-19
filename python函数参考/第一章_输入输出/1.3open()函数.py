@@ -57,4 +57,9 @@ with open('text.txt', 'r') as f:
 for line in open('./text.txt', 'r'):
     print(line.strip().strip('\n').strip('\t'))
 
-# 多文件读取操作
+# 多文件读取操作 会使用到zip()函数
+f1 = open('1.3open()函数.py', 'r')
+f2 = open('hello.py', 'r')
+f3 = open('text.txt', 'r')
+for i, j, k in zip(f1, f2, f3):
+    print(i, j, k)
