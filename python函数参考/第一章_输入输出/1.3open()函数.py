@@ -57,4 +57,63 @@ with open('text.txt', 'r') as f:
 for line in open('./text.txt', 'r'):
     print(line.strip().strip('\n').strip('\t'))
 
-# 多文件读取操作
+# 多文件读取操作 会使用到zip()函数:从参数中的多个迭代器取元素组合成一个新的迭代器,参数可以是一个迭代器，也可以是多个迭代器
+f1 = open('1.3open()函数.py', 'r')
+f2 = open('hello.py', 'r')
+f3 = open('text.txt', 'r')
+for i, j, k in zip(f1, f2, f3):
+    print(i, j, k)
+
+# zip()函数单个迭代器
+# zip(iterable)从iterable中依次取一个元素组成一个元祖
+list1 = [1, 2, 3, 4]
+tuple1 = zip(list1)
+print(tuple1)  # <zip object at 0x0000000003662B40> 是一个对象
+print("zip()函数的返回类型：\n", type(tuple1))  # <class 'zip'>类型
+print("zip对象转化为列表：\n", list(tuple1))  # [(1,), (2,), (3,), (4,)]
+
+# zip()函数有2个参数
+# zip()函数分别从a和b中依次各取一个元素组成一个元祖，再依次将组成的元祖组合成一个新的迭代器---zip类型数据
+m = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+n = [[2, 2, 2], [3, 3, 3], [4, 4, 4]]
+p = [[2, 2, 2], [3, 3, 3]]
+# 行与列相同
+# print("行与列相同:\n", list(zip(m, n)))
+# 行与列不同
+print("行与列不同:\n", list(zip(m, p)))
+
+## zip()应用，也可以使用for循环+列表推导式实现
+# 矩阵相加减、点乘
+m = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+n = [[2, 2, 2], [3, 3, 3], [4, 4, 4]]
+# 矩阵点乘
+print('=*' * 10 + "矩阵点乘" + '=*' * 10)
+print([x * y for a, b in zip(m, n) for x, y in zip(a, b)])
+# 矩阵相加,相减雷同
+print('=*' * 10 + "矩阵相加,相减" + '=*' * 10)
+print([x + y for a, b in zip(m, n) for x, y in zip(a, b)])
+
+## *zip()函数
+m = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+n = [[2, 2, 2], [3, 3, 3], [4, 4, 4]]
+print("*zip(m, n)返回:\n", *zip(m, n))
+[a, b, c] = [*zip(m, n)]
+print(type(a))
+m2, n2 = zip(*zip(m, n))
+print(m == list(m2) and n == list(n2))
+
+
+# Demo5 递归输出文件内容
+import os
+
+all = []
+dir_name = './sometext'
+child_list = os.listdir(dir_name)
+for child in child_list:
+    child_dir = dir_name + '/'+child
+    with open(child_dir, 'rb') as f:
+        new = []
+        for line in f:
+            new.append(line.decode('utf-8'))
+        all.append(new)
+print(all)
